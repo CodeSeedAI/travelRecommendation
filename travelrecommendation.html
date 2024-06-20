@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelBloom</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            background-color: #2c3e50;
+            padding: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .navbar a:hover {
+            background-color: #1a252f;
+        }
+        .navbar .search-bar {
+            display: flex;
+            margin-left: auto;
+        }
+        .navbar input[type="text"] {
+            padding: 5px;
+            margin-right: 5px;
+        }
+        .navbar button {
+            padding: 5px 10px;
+            margin-right: 5px;
+            background-color: #3498db;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        .navbar button:hover {
+            background-color: #2980b9;
+        }
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .bg-image {
+            background-image: url('./travelproject.jpg'); /* Replace with your image URL */
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: left; /* Aligns text to the left */
+        }
+
+
+        .overlay-text h1 {
+            font-size: 2em;
+            margin: 10px 0;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">TravelFun</div>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact Us</a>
+        <div class="search-bar">
+            <input type="text" placeholder="Enter a destination or keyword">
+            <button type="button" onclick="search()">Search</button>
+            <button type="button" onclick="reset()">Clear</button>
+        </div>
+    </div>
+
+    <div class="bg-image">
+        <div class="overlay-text">
+            <h1>We are global leaders in travel experiences.</h1>
+            <h1>Your satisfaction is our top priority.</h1>
+            <h1>Let us plan your travel dream vacation.</h1>
+            <h1>Call us today!</h1>
+        </div>
+    </div>
+
+    <script>
+        function search() {
+            alert('Search function not implemented yet.');
+        }
+
+        function reset() {
+            document.querySelector('.search-bar input').value = '';
+        }
+    </script>
+</body>
+</html>
