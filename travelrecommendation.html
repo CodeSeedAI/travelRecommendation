@@ -76,39 +76,229 @@
             margin: 10px 0;
         }
 
+        #about-us{
+            display: none;
+        }
+
+        .contact-form {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            width: 400px;
+        }
+
+        .contact-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .contact-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .contact-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .module{
+            color: white;
+            display: none
+        }
+        .search-result {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+
+        .search-result img {
+            max-width: 150px;
+            margin-right: 20px;
+        }
+
+        .search-result h3 {
+            margin: 0;
+        }
+
+        .search-result p {
+            margin: 5px 0;
+        }
+
+        .search-result a {
+            color: #1a0dab;
+            text-decoration: none;
+        }
+
+        .search-result a:hover {
+            text-decoration: underline;
+        }
+
+        #results{
+            width: 500px;
+            position: absolute;
+            top: 4%;
+            left: 60%;
+            background-color: white;
+        }
+
     </style>
 
 </head>
 <body>
     <div class="navbar">
         <div class="logo">TravelFun</div>
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact Us</a>
+        <a href="#home" onclick="home()">Home</a>
+        <a href="#about" onclick="about()">About Us</a>
+        <a href="#contact" onclick="contact()">Contact Us</a>
+
         <div class="search-bar">
-            <input type="text" placeholder="Enter a destination or keyword">
+            <input type="text" id='q' placeholder="Enter a destination or keyword">
             <button type="button" onclick="search()">Search</button>
             <button type="button" onclick="reset()">Clear</button>
         </div>
     </div>
 
     <div class="bg-image">
-        <div class="overlay-text">
-            <h1>We are global leaders in travel experiences.</h1>
-            <h1>Your satisfaction is our top priority.</h1>
-            <h1>Let us plan your travel dream vacation.</h1>
-            <h1>Call us today!</h1>
+        
+        <div class='module' id='index'>
+            <div class="overlay-text">
+                <h1>We are global leaders in travel experiences.</h1>
+                <h1>Your satisfaction is our top priority.</h1>
+                <h1>Let us plan your travel dream vacation.</h1>
+                <h1>Call us today!</h1>
+            </div>
         </div>
+
+        <div class='module' id='about-us'>
+            <h2>About Us</h2>
+            <div class="overlay-text">
+                <h1>We've been planning dream vacations to exotic destinations around the world for 15 years.</h1>
+                <h1>Our travel agents are knowledgable and experienced ravel planning professionals.</h1>
+                <h1>Every detail of your trip will be meticulously planned from beginning to end.</h1>
+                <h1>Become one of our many happy clients, and experience the wonders of our world!</h1>
+            </div>
+        </div>  
+
+        <div  class='module' id='contact-us'>
+            <h2>Contact Us</h2>
+            <div class="overlay-text">
+            
+            </div>
+
+            <div class="contact-form">
+                <form action="/submit_form" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                    
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+
+        <div id='results'></div>
+
     </div>
 
     <script>
         function search() {
-            alert('Search function not implemented yet.');
+            fetch('travel_recommendation_api.json').then(
+                function(r){ 
+                    return r.json() 
+            }).then(
+                function(response){ 
+                    results = [
+                        ...response.temples, 
+                        ...response.countries[0].cities, 
+                        ...response.countries[1].cities, 
+                        ...response.countries[2].cities, 
+                        ...response.beaches
+                    ]
+
+
+
+                    const q = document.getElementById('q').value
+
+                    const found = results.filter(
+                        e => e.description.toLowerCase().includes(q)
+                    )
+
+                    document.getElementById('results').innerHTML = ''
+
+                    found.forEach((e,i) => {
+                        
+                        const f = `<div class="search-result">
+                            <p>${e.name}</p>
+                            <img src="${e.imageUrl}" alt="Image description">
+                            <div>
+                                <h3><a href="https://example.com/result1">Visit</a></h3>
+                                <p>${e.description}</p>
+                            </div>
+                        </div>`
+
+                        const node = document.createElement('div')
+                        node.innerHTML = f
+                        document.getElementById('results').appendChild(node)
+                    })
+                }
+            )
         }
 
         function reset() {
             document.querySelector('.search-bar input').value = '';
         }
+
+        function hide(){
+            document.querySelectorAll('.module').forEach(function(e, i){
+                e.style.display = 'none'
+            })    
+
+        }
+
+        function home(){
+            hide()
+            document.getElementById('index').style.display = 'inline'
+        }
+
+        function about(){
+            hide()            
+            document.getElementById('about-us').style.display = 'inline'
+        }
+        
+        function contact(){
+            hide()
+            document.getElementById('contact-us').style.display = 'inline'
+
+        }
+
+        (function(){
+            home()
+        })()
     </script>
 </body>
 </html>
