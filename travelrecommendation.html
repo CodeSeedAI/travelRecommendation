@@ -132,7 +132,7 @@
         }
 
         .search-result img {
-            max-width: 150px;
+            max-height: 200px;
             margin-right: 20px;
         }
 
@@ -240,8 +240,6 @@
                         ...response.beaches
                     ]
 
-
-
                     const q = document.getElementById('q').value
 
                     const found = results.filter(
@@ -254,7 +252,7 @@
                         
                         const f = `<div class="search-result">
                             <p>${e.name}</p>
-                            <img src="${e.imageUrl}" alt="Image description">
+                            <img src="${e.imageUrl}" width='100%' alt="Image description">
                             <div>
                                 <h3><a href="https://example.com/result1">Visit</a></h3>
                                 <p>${e.description}</p>
