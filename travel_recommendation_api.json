@@ -54,13 +54,13 @@
         "id": 1,
         "name": "Angkor Wat, Cambodia",
         "imageUrl": "https://traveldigg.com/wp-content/uploads/2017/02/Angkor-Wat-Temple-Cambodia.jpg",
-        "description": "A UNESCO World Heritage site and the largest religious monument in the world."
+        "description": "A UNESCO World Heritage site, ancient temple and the largest religious monument in the world."
       },
       {
         "id": 2,
         "name": "Taj Mahal, India",
         "imageUrl": "https://lp-cms-production.imgix.net/news/2018/01/taj-mahal-visitor-limits.jpg?w=1200&sharp=10&vib=20",
-        "description": "An iconic symbol of love and a masterpiece of Mughal architecture."
+        "description": "An iconic temple of love and a masterpiece of Mughal architecture."
       }
     ],
     "beaches": [
